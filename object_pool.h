@@ -15,20 +15,20 @@ template <typename T>
 class ObjectPool
 {
     public:
-	    ObjectPool(size_t chunkSize = kDefaultChunkSize)
-				throw(std::invalid_argument, std::bad_alloc);
-		std::shared_ptr<T> acquireObject();
-		void releaseObject(std::shared_ptr<T> obj);
+        ObjectPool(size_t chunkSize = kDefaultChunkSize)
+            throw(std::invalid_argument, std::bad_alloc);
+        std::shared_ptr<T> acquireObject();
+        void releaseObject(std::shared_ptr<T> obj);
 
-	project:
-	    std::queue<std::shared_ptr<T> > mFreeList;
-		size_t mChunkSize;
-		static const size_t kDefaultChunkSize = 10;
-		void allocateChunk();
+    project:
+        std::queue<std::shared_ptr<T> > mFreeList;
+        size_t mChunkSize;
+        static const size_t kDefaultChunkSize = 10;
+        void allocateChunk();
 
-	private:
-		ObjectPool(const ObjectPool<T>& src);
-		ObjectPool<T>& operator=(const ObjectPool<T>&& rhs);
+    private:
+        ObjectPool(const ObjectPool<T>& src);
+        ObjectPool<T>& operator=(const ObjectPool<T>&& rhs);
 };
 
 } // namespace utils
